@@ -494,7 +494,8 @@ arima_ITS_model_plot_weekly_proximate <- data.table::rbindlist(df_arima_ITS_mode
   theme_minimal() +
   theme(
     legend.position="bottom",
-    legend.text = element_text(size = 8),
+    legend.text = element_text(size = 9),
+    legend.key.size = unit(1, 'cm'),
     legend.title = element_text(size = 8, color = "red", face = "bold", hjust = 0.5),
     axis.line.y = element_line(colour = "grey",inherit.blank = FALSE),
     axis.line.x = element_line(colour = "grey",inherit.blank = FALSE),
@@ -506,8 +507,8 @@ arima_ITS_model_plot_weekly_proximate <- data.table::rbindlist(df_arima_ITS_mode
     plot.caption = element_text(angle = 0, size = 10, face = "italic"),
     axis.title.x = element_text(size = 10, face = "bold"),
     axis.title.y = element_text(size = 10, face = "bold"),
-    strip.text.x = element_text(size = 8.5, face = "bold"),
-    strip.text.y = element_text(size = 8.5, face = "bold"),
+    strip.text.x = element_text(size = 9, face = "bold"),
+    strip.text.y = element_text(size = 9, face = "bold"),
     #strip.background.x = element_rect(fill = "grey80", linetype = 0),
     #strip.background.y = element_rect(fill = "grey80", linetype = 0), 
     panel.grid.major.y = element_blank(),
@@ -567,7 +568,8 @@ arima_prediction_model_plot_weekly_proximate <- data.table::rbindlist(df_arima_p
   theme_minimal() +
   theme(
     legend.position="bottom",
-    legend.text = element_text(size = 8),
+    legend.text = element_text(size = 9),
+    legend.key.size = unit(0.8, 'cm'),
     legend.title = element_text(size = 8, color = "red", face = "bold", hjust = 0.5),
     axis.line.y = element_line(colour = "grey",inherit.blank = FALSE),
     axis.line.x = element_line(colour = "grey",inherit.blank = FALSE),
@@ -579,8 +581,8 @@ arima_prediction_model_plot_weekly_proximate <- data.table::rbindlist(df_arima_p
     plot.caption = element_text(angle = 0, size = 10, face = "italic"),
     axis.title.x = element_text(size = 11, face = "bold"),
     axis.title.y = element_text(size = 11, face = "bold"),
-    strip.text.x = element_text(size = 8.5, face = "bold"),
-    strip.text.y = element_text(size = 8.5, face = "bold"),
+    strip.text.x = element_text(size = 9, face = "bold"),
+    strip.text.y = element_text(size = 9, face = "bold"),
     #strip.background.x = element_rect(fill = "grey80", linetype = 0),
     #strip.background.y = element_rect(fill = "grey80", linetype = 0), 
     panel.grid.major.y = element_blank(),

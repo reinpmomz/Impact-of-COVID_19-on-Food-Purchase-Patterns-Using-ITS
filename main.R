@@ -51,8 +51,14 @@ source("sample_supermarket_C_D.R")
 #source("insert_data_tables_local_database.R")
 
 ######################################################################
-## Plots
+## Item categories
+### nova/food group item categories
+source("nova_food_group_item_categories.R")
 
+### save output
+source("save_nova_food_group_item_output.R")
+
+## Plots
 ### Time series plots - proportion
 source("nova_trend_year_prop_plots.R")
 source("food_group_trend_year_prop_plots.R")

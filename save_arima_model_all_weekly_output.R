@@ -179,7 +179,7 @@ writexl::write_xlsx(list(model_metrics = dplyr::bind_rows(data.table::rbindlist(
                                          , across(c("Estimate", "2.5 %", "97.5 %"), ~ifelse(item %in% c("nova", "food group"), .x*100, .x))
                                          , across(c("Estimate", "2.5 %", "97.5 %"), ~round(.x, 4))
                                          , across(c("Estimate", "2.5 %", "97.5 %"), ~format(.x, ,scientific = FALSE, trim = TRUE))
-                                         , estimate_ci = paste0(Estimate, " (", `2.5 %`, ", ",`97.5 %`, ")")
+                                         , estimate_ci = paste0(Estimate,"\n", " (", `2.5 %`, ", ",`97.5 %`, ")")
                                          ) %>%
                            dplyr::select(any_of(c("item", "group", "term", "estimate_ci", "Pr(>|z|)", "Pr(>|t|)"))
                                          ) %>%
