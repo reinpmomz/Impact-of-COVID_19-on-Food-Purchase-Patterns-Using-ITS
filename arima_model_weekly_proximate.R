@@ -457,6 +457,7 @@ arima_ITS_model_plot_weekly_proximate <- data.table::rbindlist(df_arima_ITS_mode
                                   )
                  , curfew_start = curfew_start_day
                  , curfew_end = curfew_end_day
+                 , group = forcats::as_factor(group) #creates levels in the order in which they appear
                  ) %>%
   dplyr::group_by(group) %>%
   dplyr::mutate(y_max = max(actual, point_forecast_interruption1, point_forecast_interruption2, na.rm = TRUE)
@@ -544,6 +545,7 @@ df_arima_prediction_model_weekly_proximate <- sapply(unique(df_analysis_ITS_week
 arima_prediction_model_plot_weekly_proximate <- data.table::rbindlist(df_arima_prediction_model_weekly_proximate) %>%
   dplyr::mutate(curfew_start = curfew_start_day
                 , curfew_end = curfew_end_day
+                , group = forcats::as_factor(group) #creates levels in the order in which they appear
                 ) %>%
   ggplot(aes(x=date, y = actual)) +
   geom_line(aes(y = point_forecast_interruption1,colour="Predicted(No Interruption)"),lty=1) +

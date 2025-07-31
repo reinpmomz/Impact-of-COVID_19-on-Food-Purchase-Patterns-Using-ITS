@@ -455,6 +455,7 @@ arima_ITS_model_plot_weekly_mineral <- data.table::rbindlist(df_arima_ITS_model_
                                   )
                  , curfew_start = curfew_start_day
                  , curfew_end = curfew_end_day
+                 , group = forcats::as_factor(group) #creates levels in the order in which they appear
                  ) %>%
   dplyr::group_by(group) %>%
   dplyr::mutate(y_max = max(actual, point_forecast_interruption1, point_forecast_interruption2, na.rm = TRUE)
@@ -542,6 +543,7 @@ df_arima_prediction_model_weekly_mineral <- sapply(unique(df_analysis_ITS_weekly
 arima_prediction_model_plot_weekly_mineral <- data.table::rbindlist(df_arima_prediction_model_weekly_mineral) %>%
   dplyr::mutate(curfew_start = curfew_start_day
                 , curfew_end = curfew_end_day
+                , group = forcats::as_factor(group) #creates levels in the order in which they appear
                 ) %>%
   ggplot(aes(x=date, y = actual)) +
   geom_line(aes(y = point_forecast_interruption1,colour="Predicted(No Interruption)"),lty=1) +
