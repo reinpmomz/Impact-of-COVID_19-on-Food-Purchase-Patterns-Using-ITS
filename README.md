@@ -1,4 +1,4 @@
-# Impact-of-COVID_19-on-Food-Purchase-Behavior-Using-ITS
+# Impact-of-COVID_19-on-Food-Purchase-Patterns-Using-ITS
 Utilizing Interrupted Time Series analysis to examine changes in food purchasing and nutritional composition before, during, and after the COVID-19 pandemic.
 
 ## Background
@@ -50,9 +50,9 @@ The data used for analysis is available on reasonable request from the [**Study 
    
 ## Run
 
-After cloning the repository or downloading the ZIP, you also need the data files (**Data used for analysis**) in the _data_ sub-folder of _Impact-of-COVID_19-on-Food-Purchase-Behavior-Using-ITS_ folder.
+After cloning the repository or downloading the ZIP, you also need the data files (**Data used for analysis**) in the _data_ sub-folder of _Impact-of-COVID_19-on-Food-Purchase-Patterns-Using-ITS_ folder.
 
-Open `RStudio` then set your working directory to the _Impact-of-COVID_19-on-Food-Purchase-Behavior-Using-ITS_ folder. 
+Open `RStudio` then set your working directory to the _Impact-of-COVID_19-on-Food-Purchase-Patterns-Using-ITS_ folder. 
 
 - If you get data for this project, it is advisable to work on a `RStudio Server` setup and run individual files. To run individual files, open the `main.R` script, and run from the beginning.
 - To run all files at once, copy the below code in RStudio and run
