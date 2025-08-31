@@ -7,15 +7,15 @@ working_directory
 
 ## Sensitivity Analysis - Comparing coefficients and p-values
 
-sensitivity_gls_arima_model_all_weekly <- dplyr::bind_rows(data.table::rbindlist(gls_model_all_weekly_nova_coefficients)
-                                                           , data.table::rbindlist(gls_model_all_weekly_food_group_coefficients)
-                                                           , data.table::rbindlist(gls_model_all_weekly_proximate_coefficients)
-                                                           , data.table::rbindlist(gls_model_all_weekly_mineral_coefficients)
-                                                           , data.table::rbindlist(gls_model_all_weekly_vitamin_coefficients)
-                                                           ) %>%
+df_sensitivity_gls_arima_model_all_weekly <- dplyr::bind_rows(data.table::rbindlist(gls_model_all_weekly_nova_coefficients)
+                                                              , data.table::rbindlist(gls_model_all_weekly_food_group_coefficients)
+                                                              , data.table::rbindlist(gls_model_all_weekly_proximate_coefficients)
+                                                              , data.table::rbindlist(gls_model_all_weekly_mineral_coefficients)
+                                                              , data.table::rbindlist(gls_model_all_weekly_vitamin_coefficients)
+                                                              ) %>%
   dplyr::select(any_of(c("item", "group", "term", "Estimate", "Pr(>|z|)", "Pr(>|t|)"))
                 ) %>%
-  dplyr::mutate(across(any_of(c("Pr(>|z|)", "Pr(>|t|)")), ~round(.x, 3))
+  dplyr::mutate(across(any_of(c("Pr(>|z|)", "Pr(>|t|)")), ~round(.x, 4))
                 , across(c("Estimate"), ~ifelse(item %in% c("nova", "food group"), .x*100, .x))
                 , across(c("Estimate"), ~round(.x, 5))
                 #, across(c("Estimate"), ~format(.x, ,scientific = FALSE, trim = TRUE))
@@ -38,7 +38,7 @@ sensitivity_gls_arima_model_all_weekly <- dplyr::bind_rows(data.table::rbindlist
                       dplyr::filter(term %in% c("intercept", "xreg", "xreg1", "xreg2", "xreg3", "xreg4", "xreg5")) %>%
                       dplyr::select(any_of(c("item", "group", "term", "Estimate", "Pr(>|z|)", "Pr(>|t|)"))
                                     ) %>%
-                      dplyr::mutate(across(any_of(c("Pr(>|z|)", "Pr(>|t|)")), ~round(.x, 3))
+                      dplyr::mutate(across(any_of(c("Pr(>|z|)", "Pr(>|t|)")), ~round(.x, 4))
                                     , across(c("Estimate"), ~ifelse(item %in% c("nova", "food group"), .x*100, .x))
                                     , across(c("Estimate"), ~round(.x, 5))
                                     #, across(c("Estimate"), ~format(.x, ,scientific = FALSE, trim = TRUE))
@@ -56,22 +56,22 @@ sensitivity_gls_arima_model_all_weekly <- dplyr::bind_rows(data.table::rbindlist
                                                                  term
                                                           ))))))
                 , across(c("item", "group", "term"), ~forcats::as_factor(.x))
-                , cutt_off_pvalue_gls = ifelse(pvalue_gls <0.05, "TRUE", "FALSE")
-                , cutt_off_pvalue_arima = ifelse(pvalue_arima <0.05, "TRUE", "FALSE")
+                , cutt_off_pvalue_gls = ifelse(pvalue_gls <= 0.05, "TRUE", "FALSE")
+                , cutt_off_pvalue_arima = ifelse(pvalue_arima <= 0.05, "TRUE", "FALSE")
                 , same_pvalue = ifelse(cutt_off_pvalue_gls == cutt_off_pvalue_arima, "TRUE", "FALSE")
                 , same_magnitude_coeff = ifelse(sign(estimate_gls) == sign(estimate_arima), "TRUE", "FALSE")
                 , same_magnitude_sign = ifelse(same_magnitude_coeff == "TRUE", sign(estimate_gls), NA)
                 , same_magnitude_sign = if_else(same_magnitude_sign < 0, "-", "+")
-                , sensitivity = ifelse(same_magnitude_coeff == "TRUE" & same_pvalue == "TRUE" & pvalue_gls < 0.05 
-                                       & pvalue_arima <0.05, "Significant Stable Coefficient",
+                , sensitivity = ifelse(same_magnitude_coeff == "TRUE" & same_pvalue == "TRUE" & pvalue_gls <= 0.05 
+                                       & pvalue_arima <= 0.05, "Significant Stable Coefficient",
                                 ifelse(same_magnitude_coeff == "TRUE" & same_pvalue == "TRUE" & pvalue_gls > 0.05
                                        & pvalue_arima >0.05, "Non-Significant Stable Coefficient",
                                 ifelse(same_magnitude_coeff == "TRUE" & same_pvalue == "FALSE" & cutt_off_pvalue_gls == "TRUE"
                                        & cutt_off_pvalue_arima == "FALSE", "Stable Coefficient Significant in GLS only",
                                 ifelse(same_magnitude_coeff == "TRUE" & same_pvalue == "FALSE" & cutt_off_pvalue_gls == "FALSE"
                                        & cutt_off_pvalue_arima == "TRUE", "Stable Coefficient Significant in ARIMA only",
-                                ifelse(same_magnitude_coeff == "FALSE" & same_pvalue == "TRUE" & pvalue_gls < 0.05 
-                                       & pvalue_arima <0.05, "Significant Unstable Coefficient",
+                                ifelse(same_magnitude_coeff == "FALSE" & same_pvalue == "TRUE" & pvalue_gls <= 0.05 
+                                       & pvalue_arima <= 0.05, "Significant Unstable Coefficient",
                                 ifelse(same_magnitude_coeff == "FALSE" & same_pvalue == "TRUE" & pvalue_gls > 0.05
                                        & pvalue_arima >0.05, "Non-Significant Unstable Coefficient",
                                 ifelse(same_magnitude_coeff == "FALSE" & same_pvalue == "FALSE" & cutt_off_pvalue_gls == "TRUE"
@@ -80,7 +80,18 @@ sensitivity_gls_arima_model_all_weekly <- dplyr::bind_rows(data.table::rbindlist
                                        & cutt_off_pvalue_arima == "TRUE", "Unstable Coefficient Significant in ARIMA only", NA ))))))))
                 ) %>%
   dplyr::select(any_of(c("item", "group", "term", "same_magnitude_sign", "sensitivity"))
-                ) %>%
+                )
+
+print(
+descriptive_table(df = df_sensitivity_gls_arima_model_all_weekly,
+                  flex_table = TRUE,
+                  foot_note = "n (%)",
+                  caption = "Sensitivity-gls/arima model all",
+                  include = c("sensitivity")
+                  )
+      )
+
+sensitivity_gls_arima_model_all_weekly_plot <- df_sensitivity_gls_arima_model_all_weekly %>%
   ggplot(aes(x= term, y=forcats::fct_rev(group), fill=sensitivity)) + 
   geom_tile(colour = "grey50") +
   geom_text(aes(label = same_magnitude_sign), color = "grey25", size = 4) +
@@ -111,10 +122,10 @@ sensitivity_gls_arima_model_all_weekly <- dplyr::bind_rows(data.table::rbindlist
                                     )
         )
 
-print(sensitivity_gls_arima_model_all_weekly)
+print(sensitivity_gls_arima_model_all_weekly_plot)
 
 ### Saving the sensitivity plot
-ggsave(plot=sensitivity_gls_arima_model_all_weekly, height = 7, width = 11,
+ggsave(plot=sensitivity_gls_arima_model_all_weekly_plot, height = 7, width = 11,
        filename = paste0("sensitivity_gls_arima_model_all_weekly",".png"),
        path = output_Dir, bg='white')
 

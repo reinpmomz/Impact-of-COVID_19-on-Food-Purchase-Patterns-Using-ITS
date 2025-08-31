@@ -149,6 +149,8 @@ source("save_gls_model_interruption2_weekly_output.R")
 
 #### Sensitivity analysis
 source("sensitivity_gls_arima_model_all.R")
+source("sensitivity_gls_arima_model_interruption1.R")
+source("sensitivity_gls_arima_model_interruption2.R")
 
 ######################################################################
 ## Save workspace at the end without working directory path
