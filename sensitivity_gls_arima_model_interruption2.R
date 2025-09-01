@@ -78,15 +78,6 @@ df_sensitivity_gls_arima_model_interruption2_weekly <- dplyr::bind_rows(data.tab
   dplyr::select(any_of(c("item", "group", "term", "same_magnitude_sign", "sensitivity"))
                 )
 
-print(
-descriptive_table(df = df_sensitivity_gls_arima_model_interruption2_weekly,
-                  flex_table = TRUE,
-                  foot_note = "n (%)",
-                  caption = "Sensitivity-gls/arima model interruption2",
-                  include = c("sensitivity")
-                  )
-)
-
 sensitivity_gls_arima_model_interruption2_weekly_plot <- df_sensitivity_gls_arima_model_interruption2_weekly %>%
   ggplot(aes(x= term, y=forcats::fct_rev(group), fill=sensitivity)) + 
   geom_tile(colour = "grey50") +
@@ -125,5 +116,28 @@ print(sensitivity_gls_arima_model_interruption2_weekly_plot)
 ggsave(plot=sensitivity_gls_arima_model_interruption2_weekly_plot, height = 7, width = 11,
        filename = paste0("sensitivity_gls_arima_model_interruption2_weekly",".png"),
        path = output_Dir, bg='white')
+
+### Saving the sensitivity descriptive
+flextable::save_as_docx(descriptive_table(df = df_sensitivity_gls_arima_model_interruption2_weekly,
+                                          flex_table = TRUE,
+                                          foot_note = "n (%)",
+                                          caption = "Sensitivity-gls/arima model interruption2",
+                                          include = c("sensitivity")
+                                          ), 
+                        path = base::file.path(output_Dir, "descriptive_sensitivity_gls_arima_model_interruption2.docx"),
+                        align = "center", #left, center (default) or right.
+                        pr_section = officer::prop_section(
+                          page_size = officer::page_size(orient = "portrait"), #Use NULL (default value) for no content.
+                          page_margins = officer::page_mar(), #Use NULL (default value) for no content.
+                          type = "nextPage", # "continuous", "evenPage", "oddPage", "nextColumn", "nextPage"
+                          section_columns = NULL, #Use NULL (default value) for no content.
+                          header_default = NULL, #Use NULL (default value) for no content.
+                          header_even = NULL, #Use NULL (default value) for no content.
+                          header_first = NULL, #Use NULL (default value) for no content.
+                          footer_default = NULL, #Use NULL (default value) for no content.
+                          footer_even = NULL, #Use NULL (default value) for no content.
+                          footer_first = NULL #Use NULL (default value) for no content.
+                          )
+                        )
 
 #scales::show_col(scales::hue_pal(direction=1)(6))
