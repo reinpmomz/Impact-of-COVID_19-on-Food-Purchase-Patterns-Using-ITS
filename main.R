@@ -122,8 +122,9 @@ source("acf_ITS_weekly_proximate.R")
 source("acf_ITS_weekly_mineral.R")
 source("acf_ITS_weekly_vitamin.R")
 
-#### ARIMA Model
 num_samples <- 100 #for prediction uncertainties
+
+#### ARIMA Model
 source("arima_model_weekly_nova.R")
 source("arima_model_weekly_food_group.R")
 source("arima_model_weekly_proximate.R")

@@ -83,6 +83,7 @@ df_sensitivity_gls_arima_model_all_weekly <- dplyr::bind_rows(data.table::rbindl
                 )
 
 sensitivity_gls_arima_model_all_weekly_plot <- df_sensitivity_gls_arima_model_all_weekly %>%
+  #dplyr::filter(item != "food group") %>%
   ggplot(aes(x= term, y=forcats::fct_rev(group), fill=sensitivity)) + 
   geom_tile(colour = "grey50") +
   geom_text(aes(label = same_magnitude_sign), color = "grey25", size = 4) +
@@ -121,11 +122,11 @@ ggsave(plot=sensitivity_gls_arima_model_all_weekly_plot, height = 7, width = 11,
        path = output_Dir, bg='white')
 
 ### Saving the sensitivity descriptive
-flextable::save_as_docx(descriptive_table(df = df_sensitivity_gls_arima_model_all_weekly,
-                                          flex_table = TRUE,
-                                          foot_note = "n (%)",
-                                          caption = "Sensitivity-gls/arima model all",
-                                          include = c("sensitivity")
+flextable::save_as_docx(descriptive_table(df = df_sensitivity_gls_arima_model_all_weekly #%>% dplyr::filter(item != "food group")
+                                          ,flex_table = TRUE
+                                          ,foot_note = "n (%)"
+                                          ,caption = "Sensitivity-gls/arima model all"
+                                          ,include = c("sensitivity")
                                           ), 
                         path = base::file.path(output_Dir, "descriptive_sensitivity_gls_arima_model_all.docx"),
                         align = "center", #left, center (default) or right.
