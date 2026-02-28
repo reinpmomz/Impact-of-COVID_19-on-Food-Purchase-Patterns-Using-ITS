@@ -1,4 +1,6 @@
 # Impact-of-COVID_19-on-Food-Purchase-Patterns-Using-ITS
+[![DOI](https://zenodo.org/badge/1019590984.svg)](https://doi.org/10.5281/zenodo.18427903)
+
 Utilizing Interrupted Time Series analysis to examine changes in food purchasing and nutritional composition before, during, and after the COVID-19 pandemic.
 
 ## Background
