@@ -23,13 +23,13 @@ required_packages <- c("tidyverse", "readxl", "writexl", "janitor", "knitr", "ka
                        "lubridate", "gtsummary", "flextable", "labelled", "sjlabelled", "tibble", "scales",
                        "rstatix", "checkmate", "data.table", "fitdistrplus", "grDevices",
                        "fastDummies", "ggpubr", "rlang", "ggstats", "gridExtra", "cowplot", "tseries",
-                       "nlme", "lmtest", "forecast", "AICcmodavg", "caret", "Metrics"
+                       "nlme", "lmtest", "forecast", "AICcmodavg", "caret", "Metrics", "RPostgres", "DBI"
                        )
 
 installed_packages <- required_packages %in% base::rownames(utils::installed.packages())
 
 if (base::any(installed_packages==FALSE)) {
-  utils::install.packages(required_packages[!installed_packages], repos = "http://cran.us.r-project.org"
+  utils::install.packages(required_packages[!installed_packages]#, repos = "http://cran.us.r-project.org"
                           )
 }
 

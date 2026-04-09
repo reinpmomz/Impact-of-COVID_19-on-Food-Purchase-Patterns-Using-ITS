@@ -7,7 +7,7 @@ library(tibble)
 working_directory
 
 ## Reading the recode file sheet
-recode_file <- read_excel_allsheets("supermarket_c_d_recode_file.xlsx")
+recode_file <- read_excel_allsheets("./2.load_data_and_clean/supermarket_c_d_recode_file.xlsx")
 
 branches_vars_df <- recode_file[["branches"]] #df for branches
 
