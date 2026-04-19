@@ -166,6 +166,11 @@ source("./6.ITS_model_arima/arima_model_weekly_mineral.R")
 source("./6.ITS_model_arima/arima_model_weekly_vitamin.R")
 
 #### Saving ARIMA outputs
+source("./6.ITS_model_arima/arima_model_weekly_nova_plot.R")
+source("./6.ITS_model_arima/arima_model_weekly_food_group_plot.R")
+source("./6.ITS_model_arima/arima_model_weekly_proximate_plot.R")
+source("./6.ITS_model_arima/arima_model_weekly_mineral_plot.R")
+source("./6.ITS_model_arima/arima_model_weekly_vitamin_plot.R")
 source("./6.ITS_model_arima/save_arima_model_all_weekly_output.R")
 source("./6.ITS_model_arima/save_arima_model_interruption1_weekly_output.R")
 source("./6.ITS_model_arima/save_arima_model_interruption2_weekly_output.R")
@@ -181,6 +186,11 @@ source("./7.ITS_model_gls/gls_model_weekly_mineral.R")
 source("./7.ITS_model_gls/gls_model_weekly_vitamin.R")
 
 #### Saving gls outputs
+source("./7.ITS_model_gls/gls_model_weekly_nova_plot.R")
+source("./7.ITS_model_gls/gls_model_weekly_food_group_plot.R")
+source("./7.ITS_model_gls/gls_model_weekly_proximate_plot.R")
+source("./7.ITS_model_gls/gls_model_weekly_mineral_plot.R")
+source("./7.ITS_model_gls/gls_model_weekly_vitamin_plot.R")
 source("./7.ITS_model_gls/save_gls_model_all_weekly_output.R")
 source("./7.ITS_model_gls/save_gls_model_interruption1_weekly_output.R")
 source("./7.ITS_model_gls/save_gls_model_interruption2_weekly_output.R")
